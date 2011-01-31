@@ -1,0 +1,18 @@
+{% extends "djangoobjfeed/render_feed_entry.html" %}
+{% load i18n %}
+
+{% block feed_entry_avatar %}{% endblock %}
+
+{% block feed_entry_header %}
+  {% if feed_entry.obj_feed_entry.title %}
+    <h1>{{ feed_entry.obj_feed_entry.title }}</h1>
+  {% else %}
+    <!-- Fallback. -->
+    <h1>{% trans "Article" %}</h1> 
+  {% endif %}
+{% endblock %}
+
+{% block feed_entry_body %}
+  {{ feed_entry.obj_feed_entry.obj.description|striptags|truncatewords:100 }}<br>
+  <a href="{% url page slug=feed_entry.obj_feed_entry.obj.slug %}">{% trans "Full article" %}</a>
+{% endblock %}
